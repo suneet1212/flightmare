@@ -17,7 +17,7 @@ from flightgym import QuadrotorEnv_v1
 ############### Hyperparameters ##############
 MAX_EPISODE_STEPS = 300
 NUM_EPISODES = 1000
-NUM_ENV = 1
+NUM_ENV = 10
 GAMMA = 0.99
 LR = 1e-4
 ##############################################
@@ -109,7 +109,7 @@ if __name__ == "__main__":
                            "/flightlib/configs/vec_env.yaml", 'r'))
     # cfg = ordereddict([('env', ordereddict([('seed', 1), ('scene_id', 0), ('num_envs', 100), ('num_threads', 10), ('render', 'no')]))])
 
-    cfg["env"]["num_envs"] = NUM_ENV
+    cfg["env"]["num_envs"] = 1
     cfg["env"]["num_threads"] = 1
 
     cfg["env"]["render"] = "yes"

@@ -138,6 +138,7 @@ class PPO2(ActorCriticRLModel):
 
                 with tf.variable_scope("loss", reuse=False):
                     self.action_ph = train_model.pdtype.sample_placeholder([None], name="action_ph")
+                    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
                     self.advs_ph = tf.placeholder(tf.float32, [None], name="advs_ph")
                     self.rewards_ph = tf.placeholder(tf.float32, [None], name="rewards_ph")
                     self.old_neglog_pac_ph = tf.placeholder(tf.float32, [None], name="old_neglog_pac_ph")
@@ -299,7 +300,7 @@ class PPO2(ActorCriticRLModel):
         else:
             policy_loss, value_loss, policy_entropy, approxkl, clipfrac, _ = self.sess.run(
                 [self.pg_loss, self.vf_loss, self.entropy, self.approxkl, self.clipfrac, self._train], td_map)
-
+        # print(self.entropy)
         return policy_loss, value_loss, policy_entropy, approxkl, clipfrac
 
     def learn(self, total_timesteps, log_dir, logger, 
@@ -345,6 +346,7 @@ class PPO2(ActorCriticRLModel):
                     self.ep_info_buf.extend(ep_infos)
                     mb_loss_vals = []
                     if states is None:  # nonrecurrent version
+                        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
                         update_fac = self.n_batch // self.nminibatches // self.noptepochs + 1
                         inds = np.arange(self.n_batch)
                         for epoch_num in range(self.noptepochs):
